@@ -1,3 +1,4 @@
+// const axios = require('axios');
 const makeLi = () => {
     const li = document.createElement('li');
     const ul = documnet.querySelector('#all-characters')
@@ -5,19 +6,21 @@ const makeLi = () => {
     ul.appendChild(li)
 }
 
-const allCharacters = () => {
-    fetch('https://rickandmortyapi.com/api/character')
-        .then(response => { return response.json(); })
-        .then(characters => {
-            const characterArr = characters.results
-            characterArr.forEach(makeLi)
-            console.log(characterArr}).then(array => {
-            const img = document.getElementsByTagName('img')
-            const para = document.gerElementsByTagName('p')
-            img.src = array.id
-            console.log(array.id)
-            para.textContent = array.name
-            console.log(array.name)
-        }).catch(err => console.log('whoops!'))
-}
-allCharacters
+
+axios.get('https://rickandmortyapi.com/api/character')    
+    .then(characters => {
+        
+        const array = characters.data
+        console.log(array)
+        // const img = document.getElementsByTagName('img')
+        // const para = document.gerElementsByTagName('p')
+        // const characterArr = characters.results
+        // characterArr.forEach(makeLi)
+        console.log(characterArr)
+        // img.src = characterArr.id
+        console.log(Object.keys(characters))
+        // para.textContent = characterArr.name
+        console.log(characterArr.name)
+    })
+    .catch(err => console.log('whoops!'))
+
